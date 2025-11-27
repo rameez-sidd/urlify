@@ -4,6 +4,7 @@ import { HiMiniArrowTurnDownRight } from "react-icons/hi2";
 import { MdOutlineBarChart } from "react-icons/md";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { BASE_URL, BASE_HOSTNAME } from "../../../utils/constants";
 
 const LinkCard = ({ link, refetch }) => {
 
@@ -20,7 +21,7 @@ const LinkCard = ({ link, refetch }) => {
 
     const deleteLink = async (code) => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/links/${code}`, { method: "DELETE" });
+            const response = await fetch(`${BASE_URL}/api/links/${code}`, { method: "DELETE" });
             const result = await response.json();
 
             if (!result.success) {
@@ -41,7 +42,7 @@ const LinkCard = ({ link, refetch }) => {
 
     const copyLink = async () => {
         try {
-            await navigator.clipboard.writeText(`${import.meta.env.VITE_BASE_URL}/${link?.code}`);
+            await navigator.clipboard.writeText(`${BASE_URL}/${link?.code}`);
             toast.success("Copied to clipboard", {
                 autoClose: 2000,
                 hideProgressBar: true,
@@ -59,7 +60,7 @@ const LinkCard = ({ link, refetch }) => {
         <div className='bg-white rounded-xl p-4 flex items-center justify-between gap-4'>
             <div className='flex flex-col gap-3 w-full'>
                 <p className='flex items-center gap-2 text-violet-900'>
-                    <a href={`${import.meta.env.VITE_BASE_URL}/${link?.code}`} target="_blank" className='cursor-pointer font-extrabold hover:underline'>{import.meta.env.VITE_BASE_HOSTNAME}/{link?.code}</a>
+                    <a href={`${BASE_URL}/${link?.code}`} target="_blank" className='cursor-pointer font-extrabold hover:underline'>{BASE_HOSTNAME}/{link?.code}</a>
                     <span className='p-1 cursor-pointer rounded-sm hover:bg-violet-100' onClick={copyLink}><RiFileCopyFill /></span>
                 </p>
                 <p className='flex items-center gap-2'>

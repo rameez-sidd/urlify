@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../../../utils/constants";
 
 const useFetchAllLinks = () => {
     const [links, setLinks] = useState([]);
@@ -10,7 +11,7 @@ const useFetchAllLinks = () => {
         setFetching(true);
         setFetchError("");
         try {
-            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/links`);
+            const response = await fetch(`${BASE_URL}/api/links`);
             const result = await response.json();
             if (!result.success) {
                 console.log(result.message || "Something went wrong while fetching the links");

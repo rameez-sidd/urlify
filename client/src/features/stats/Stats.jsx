@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { Loader } from "../../shared/components/Loader";
 import { RiFileCopyFill } from "react-icons/ri";
 import { HiMiniArrowTurnDownRight } from "react-icons/hi2";
+import { BASE_URL, BASE_HOSTNAME } from "../../utils/constants";
 
 const Stats = () => {
     const { code } = useParams();
@@ -28,7 +29,7 @@ const Stats = () => {
 
     const copyLink = async () => {
         try {
-            await navigator.clipboard.writeText(`${import.meta.env.VITE_BASE_URL}/${stats?.code}`);
+            await navigator.clipboard.writeText(`${BASE_URL}/${stats?.code}`);
             toast.success("Copied to clipboard", {
                 autoClose: 2000,
                 hideProgressBar: true,
@@ -45,7 +46,7 @@ const Stats = () => {
     useEffect(() => {
         async function load() {
             try {
-                const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/links/${code}`);
+                const response = await fetch(`${BASE_URL}/api/links/${code}`);
                 const result = await response.json();
                 if (result.success) {
                     setStats(result.data);
@@ -76,7 +77,7 @@ const Stats = () => {
                         <div className='bg-white rounded-xl p-8 flex items-center justify-between gap-4'>
                             <div className='flex flex-col gap-4 w-full'>
                                 <p className='flex items-center gap-2 text-violet-900'>
-                                    <a href={`${import.meta.env.VITE_BASE_URL}/${stats?.code}`} target="_blank"  className='cursor-pointer text-2xl font-extrabold hover:underline'>{import.meta.env.VITE_BASE_HOSTNAME}/{stats?.code}</a>
+                                    <a href={`${BASE_URL}/${stats?.code}`} target="_blank"  className='cursor-pointer text-2xl font-extrabold hover:underline'>{BASE_HOSTNAME}/{stats?.code}</a>
                                     <span className='p-1 text-lg cursor-pointer rounded-sm hover:bg-violet-100' onClick={copyLink}><RiFileCopyFill /></span>
                                 </p>
                                 <p className='flex items-center gap-2'>

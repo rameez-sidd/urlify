@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Container from '../../shared/components/Container'
 import { toast } from 'react-toastify';
 import { Loader } from '../../shared/components/Loader';
+import { BASE_URL } from '../../utils/constants';
 
 const HealthCheck = () => {
     const [healthStats, setHealthStats] = useState(null);
@@ -9,7 +10,7 @@ const HealthCheck = () => {
     useEffect(() => {
         async function load() {
             try {
-                const response = await fetch(`${import.meta.env.VITE_BASE_URL}/healthz`);
+                const response = await fetch(`${BASE_URL}/healthz`);
                 const result = await response.json();
                 if (result.success) {
                     setHealthStats(result.data);

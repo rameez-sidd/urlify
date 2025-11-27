@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 import { FaArrowRight } from "react-icons/fa";
+import { BASE_URL } from '../../utils/constants';
 
 const UserForm = ({refetch}) => {
     const [form, setForm] = useState({ targetUrl: "", code: "" });
@@ -10,7 +11,7 @@ const UserForm = ({refetch}) => {
         if (generating || form.targetUrl === "") return;
         setGenerating(true);
         try {
-            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/links`, {
+            const response = await fetch(`${BASE_URL}/api/links`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(form),
