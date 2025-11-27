@@ -18,7 +18,7 @@ export async function findLink(code) {
 }
 
 export async function getAllLinks() {
-  const result = await pool.query("SELECT * FROM links ORDER BY code ASC");
+  const result = await pool.query("SELECT * FROM links ORDER BY created_at DESC");
   return result.rows;
 }
 

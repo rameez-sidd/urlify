@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { BASE_URL } from "../../../utils/constants";
 
 const useFetchAllLinks = () => {
@@ -15,7 +14,6 @@ const useFetchAllLinks = () => {
             const result = await response.json();
             if (!result.success) {
                 console.log(result.message || "Something went wrong while fetching the links");
-                toast.error(result.message || "Something went wrong while fetching the links");
                 setFetchError(result.message || "Something went wrong while fetching the links");
             }
             if (result.success) {
@@ -25,7 +23,6 @@ const useFetchAllLinks = () => {
 
         } catch (error) {
             console.log(error || error.message || "Something went wrong while fetching the links");
-            toast.error(error || error.message || "Something went wrong while fetching the links");
             setFetchError(error || error.message || "Something went wrong while fetching the links")
         } finally {
             setFetching(false);
